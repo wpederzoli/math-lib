@@ -22,6 +22,10 @@ impl Vector3 {
     pub fn new(x: f32, y: f32, z: f32) -> Self {
         Vector3 { x, y, z }
     }
+
+    pub fn dot(self, vec: Vector3) -> f32 {
+        self.x * vec.x + self.y * vec.y + self.z * vec.z
+    }
 }
 
 impl ops::Add<Vector3> for Vector3 {
@@ -70,6 +74,13 @@ impl ops::Mul<f32> for Vector3 {
             y: self.y * rhs,
             z: self.z * rhs,
         }
+    }
+}
+
+impl ops::Mul<Vector3> for Vector3 {
+    type Output = f32;
+    fn mul(self, rhs: Vector3) -> Self::Output {
+        self.x * rhs.x + self.y * rhs.y + self.z * rhs.z
     }
 }
 

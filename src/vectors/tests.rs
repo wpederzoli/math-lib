@@ -173,3 +173,20 @@ fn scalar_div_assign() {
 
     assert_eq!(vec, expected);
 }
+
+#[test]
+fn dot_product() {
+    let expected = 10.;
+    let vec_a = Vector3 {
+        x: 1.,
+        y: 1.,
+        z: 1.,
+    };
+    let vec_b = Vector3 {
+        x: 2.,
+        y: 2.,
+        z: 6.,
+    };
+    assert_eq!(vec_a * vec_b, expected);
+    assert_eq!(vec_a.dot(vec_b), expected);
+}
