@@ -190,3 +190,48 @@ fn dot_product() {
     assert_eq!(vec_a * vec_b, expected);
     assert_eq!(vec_a.dot(vec_b), expected);
 }
+
+#[test]
+fn cross_product() {
+    let expected = Vector3 {
+        x: 3.,
+        y: 3.,
+        z: -3.,
+    };
+    let vec_a = Vector3 {
+        x: 1.,
+        y: 2.,
+        z: 3.,
+    };
+    let vec_b = Vector3 {
+        x: 2.,
+        y: 1.,
+        z: 3.,
+    };
+
+    assert_eq!(vec_a % vec_b, expected);
+    assert_eq!(vec_a.cross(vec_b), expected);
+}
+
+#[test]
+fn cross_assign() {
+    let expected = Vector3 {
+        x: 3.,
+        y: 3.,
+        z: -3.,
+    };
+    let mut vec = Vector3 {
+        x: 1.,
+        y: 2.,
+        z: 3.,
+    };
+    let vec_b = Vector3 {
+        x: 2.,
+        y: 1.,
+        z: 3.,
+    };
+
+    vec %= vec_b;
+
+    assert_eq!(vec, expected);
+}

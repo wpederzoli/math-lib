@@ -26,6 +26,14 @@ impl Vector3 {
     pub fn dot(self, vec: Vector3) -> f32 {
         self.x * vec.x + self.y * vec.y + self.z * vec.z
     }
+
+    pub fn cross(self, vec: Vector3) -> Vector3 {
+        Vector3 {
+            x: (self.y * vec.z - vec.y * self.z),
+            y: -(self.x * vec.z - self.z * vec.x),
+            z: (self.x * vec.y - self.y * vec.x),
+        }
+    }
 }
 
 impl ops::Add<Vector3> for Vector3 {
@@ -108,6 +116,28 @@ impl ops::DivAssign<f32> for Vector3 {
         self.x = self.x / rhs;
         self.y = self.y / rhs;
         self.z = self.z / rhs;
+    }
+}
+
+impl ops::Rem<Vector3> for Vector3 {
+    type Output = Vector3;
+    fn rem(self, rhs: Vector3) -> Self::Output {
+        Vector3 {
+            x: (self.y * rhs.z - rhs.y * self.z),
+            y: -(self.x * rhs.z - self.z * rhs.x),
+            z: (self.x * rhs.y - self.y * rhs.x),
+        }
+    }
+}
+
+impl ops::RemAssign<Vector3> for Vector3 {
+    fn rem_assign(&mut self, rhs: Vector3) {
+        let x = self.y * rhs.z - self.z * rhs.y;
+        let y = -(self.x * rhs.z - self.z * rhs.x);
+        let z = self.x * rhs.y - self.y - rhs.x;
+        self.x = x;
+        self.y = y;
+        self.z = z;
     }
 }
 
