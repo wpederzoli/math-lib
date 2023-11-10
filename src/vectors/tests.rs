@@ -235,3 +235,11 @@ fn cross_assign() {
 
     assert_eq!(vec, expected);
 }
+
+#[test]
+fn magnitude() {
+    let expected = (14.0f32).sqrt();
+    let vec = Vector3::new(1., 2., 3.);
+
+    assert_eq!(vec.magnitude(), expected);
+}

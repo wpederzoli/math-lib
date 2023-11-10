@@ -8,16 +8,6 @@ pub struct Vector3 {
     pub z: f32,
 }
 
-impl Default for Vector3 {
-    fn default() -> Self {
-        Vector3 {
-            x: 0.,
-            y: 0.,
-            z: 0.,
-        }
-    }
-}
-
 impl Vector3 {
     pub fn new(x: f32, y: f32, z: f32) -> Self {
         Vector3 { x, y, z }
@@ -33,6 +23,26 @@ impl Vector3 {
             y: -(self.x * vec.z - self.z * vec.x),
             z: (self.x * vec.y - self.y * vec.x),
         }
+    }
+
+    pub fn magnitude(self) -> f32 {
+        (f32::powf(self.x, 2.) + f32::powf(self.y, 2.) + f32::powf(self.z, 2.)).sqrt()
+    }
+}
+
+impl Default for Vector3 {
+    fn default() -> Self {
+        Vector3 {
+            x: 0.,
+            y: 0.,
+            z: 0.,
+        }
+    }
+}
+
+impl Display for Vector3 {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "({}, {}, {})", self.x, self.y, self.z)
     }
 }
 
@@ -138,12 +148,6 @@ impl ops::RemAssign<Vector3> for Vector3 {
         self.x = x;
         self.y = y;
         self.z = z;
-    }
-}
-
-impl Display for Vector3 {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "({}, {}, {})", self.x, self.y, self.z)
     }
 }
 
