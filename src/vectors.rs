@@ -28,6 +28,15 @@ impl Vector3 {
     pub fn magnitude(self) -> f32 {
         (f32::powf(self.x, 2.) + f32::powf(self.y, 2.) + f32::powf(self.z, 2.)).sqrt()
     }
+
+    pub fn normalize(self) -> Vector3 {
+        let mag = self.magnitude();
+        if mag != 0. {
+            self / self.magnitude()
+        } else {
+            self
+        }
+    }
 }
 
 impl Default for Vector3 {

@@ -243,3 +243,27 @@ fn magnitude() {
 
     assert_eq!(vec.magnitude(), expected);
 }
+
+#[test]
+fn test_normalize_nonzero() {
+    let vector = Vector3 {
+        x: 3.0,
+        y: 4.0,
+        z: 5.0,
+    };
+    let normalized = vector.normalize();
+    assert_eq!(normalized.magnitude(), 1.0);
+}
+
+#[test]
+fn test_normalize_zero_magnitude() {
+    let zero_vector = Vector3 {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0,
+    };
+    let normalized = zero_vector.normalize();
+
+    // For a zero vector, normalization should result in the same zero vector
+    assert_eq!(normalized, zero_vector);
+}
