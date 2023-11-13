@@ -1,4 +1,7 @@
-use std::fmt::Display;
+use std::{
+    fmt::Display,
+    ops::{Add, AddAssign, Mul, MulAssign},
+};
 
 #[derive(Debug, PartialEq)]
 pub struct Matrix3x3 {
@@ -44,6 +47,56 @@ impl Display for Matrix3x3 {
             self.data[5],
             self.data[8]
         )
+    }
+}
+
+impl Add for Matrix3x3 {
+    type Output = Matrix3x3;
+    fn add(self, rhs: Self) -> Self::Output {
+        Matrix3x3::new(
+            self.data[0] + rhs.data[0],
+            self.data[3] + rhs.data[3],
+            self.data[6] + rhs.data[6],
+            self.data[1] + rhs.data[1],
+            self.data[4] + rhs.data[4],
+            self.data[7] + rhs.data[7],
+            self.data[2] + rhs.data[2],
+            self.data[5] + rhs.data[5],
+            self.data[8] + rhs.data[8],
+        )
+    }
+}
+
+impl AddAssign for Matrix3x3 {
+    fn add_assign(&mut self, rhs: Self) {
+        for i in 0..self.data.len() {
+            self.data[i] += rhs.data[i];
+        }
+    }
+}
+
+impl Mul<f32> for Matrix3x3 {
+    type Output = Matrix3x3;
+    fn mul(self, rhs: f32) -> Self::Output {
+        Matrix3x3::new(
+            self.data[0] * rhs,
+            self.data[3] * rhs,
+            self.data[6] * rhs,
+            self.data[1] * rhs,
+            self.data[4] * rhs,
+            self.data[7] * rhs,
+            self.data[2] * rhs,
+            self.data[5] * rhs,
+            self.data[8] * rhs,
+        )
+    }
+}
+
+impl MulAssign<f32> for Matrix3x3 {
+    fn mul_assign(&mut self, rhs: f32) {
+        for i in 0..self.data.len() {
+            self.data[i] *= rhs;
+        }
     }
 }
 
