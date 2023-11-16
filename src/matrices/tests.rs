@@ -73,3 +73,12 @@ fn multiplication_assign() {
 
     assert_eq!(mat3, expected);
 }
+
+#[test]
+fn identity_matrix() {
+    let expected = Matrix3x3::new(1., 0., 0., 0., 1., 0., 0., 0., 1.);
+    let mat3 = Matrix3x3::new(1., 2., 3., 4., 5., 6., 7., 8., 9.);
+
+    assert_eq!(Matrix3x3::identity(), expected);
+    assert_eq!(mat3 * Matrix3x3::identity(), mat3);
+}

@@ -3,7 +3,7 @@ use std::{
     ops::{Add, AddAssign, Mul, MulAssign},
 };
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub struct Matrix3x3 {
     pub data: [f32; 9],
 }
@@ -23,6 +23,10 @@ impl Matrix3x3 {
         Matrix3x3 {
             data: [m0, m3, m6, m1, m4, m7, m2, m5, m8],
         }
+    }
+
+    pub fn identity() -> Matrix3x3 {
+        Matrix3x3::new(1., 0., 0., 0., 1., 0., 0., 0., 1.)
     }
 }
 
