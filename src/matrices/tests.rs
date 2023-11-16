@@ -53,3 +53,32 @@ fn scalar_mul_assign() {
 
     assert_eq!(mat3, expected);
 }
+
+#[test]
+fn multiplication() {
+    let expected = Matrix3x3::new(12., 12., 12., 18., 18., 18., 24., 24., 24.);
+    let mat3_a = Matrix3x3::new(1., 1., 1., 2., 2., 2., 3., 3., 3.);
+    let mat3_b = Matrix3x3::new(2., 2., 2., 3., 3., 3., 4., 4., 4.);
+    let result = mat3_a * mat3_b;
+
+    assert_eq!(result, expected);
+}
+
+#[test]
+fn multiplication_assign() {
+    let expected = Matrix3x3::new(12., 12., 12., 18., 18., 18., 24., 24., 24.);
+    let mut mat3 = Matrix3x3::new(1., 1., 1., 2., 2., 2., 3., 3., 3.);
+
+    mat3 *= Matrix3x3::new(2., 2., 2., 3., 3., 3., 4., 4., 4.);
+
+    assert_eq!(mat3, expected);
+}
+
+#[test]
+fn identity_matrix() {
+    let expected = Matrix3x3::new(1., 0., 0., 0., 1., 0., 0., 0., 1.);
+    let mat3 = Matrix3x3::new(1., 2., 3., 4., 5., 6., 7., 8., 9.);
+
+    assert_eq!(Matrix3x3::identity(), expected);
+    assert_eq!(mat3 * Matrix3x3::identity(), mat3);
+}
