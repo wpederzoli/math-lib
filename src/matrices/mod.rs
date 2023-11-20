@@ -28,6 +28,40 @@ impl Matrix3x3 {
     pub fn identity() -> Matrix3x3 {
         Matrix3x3::new(1., 0., 0., 0., 1., 0., 0., 0., 1.)
     }
+
+    pub fn inverse(self) -> Matrix3x3 {
+        let d = self.determinant();
+        if d == 0. {
+            return self;
+        }
+
+        let cof = self.co_factor();
+
+        cof * (1. / d)
+    }
+
+    fn determinant(self) -> f32 {
+        self.data[0] * self.data[4] * self.data[8]
+            + (self.data[3] * self.data[7] * self.data[2])
+            + (self.data[6] * self.data[1] * self.data[5])
+            - (self.data[6] * self.data[4] * self.data[2])
+            - (self.data[0] * self.data[7] * self.data[5])
+            - (self.data[3] * self.data[1] * self.data[8])
+    }
+
+    fn co_factor(self) -> Matrix3x3 {
+        let c0 = self.data[4] * self.data[8] - (self.data[7] * self.data[5]);
+        let c1 = self.data[1] * self.data[8] - (self.data[7] * self.data[2]);
+        let c2 = self.data[1] * self.data[5] - (self.data[4] * self.data[2]);
+        let c3 = self.data[3] * self.data[8] - (self.data[6] * self.data[5]);
+        let c4 = self.data[0] * self.data[8] - (self.data[6] * self.data[2]);
+        let c5 = self.data[0] * self.data[5] - (self.data[3] * self.data[2]);
+        let c6 = self.data[3] * self.data[7] - (self.data[6] * self.data[4]);
+        let c7 = self.data[0] * self.data[7] - (self.data[6] * self.data[1]);
+        let c8 = self.data[0] * self.data[4] - (self.data[3] * self.data[1]);
+
+        Matrix3x3::new(c0, -(c3), c6, -(c1), c4, -(c7), c2, -(c5), c8)
+    }
 }
 
 impl Default for Matrix3x3 {
@@ -42,13 +76,13 @@ impl Display for Matrix3x3 {
             f,
             "\n| {}, {}, {} |\n| {}, {}, {} |\n| {}, {}, {} |",
             self.data[0],
-            self.data[3],
-            self.data[6],
             self.data[1],
-            self.data[4],
-            self.data[7],
             self.data[2],
+            self.data[3],
+            self.data[4],
             self.data[5],
+            self.data[6],
+            self.data[7],
             self.data[8]
         )
     }
@@ -83,15 +117,15 @@ impl Mul<f32> for Matrix3x3 {
     type Output = Matrix3x3;
     fn mul(self, rhs: f32) -> Self::Output {
         Matrix3x3::new(
-            self.data[0] * rhs,
-            self.data[3] * rhs,
-            self.data[6] * rhs,
-            self.data[1] * rhs,
-            self.data[4] * rhs,
-            self.data[7] * rhs,
-            self.data[2] * rhs,
-            self.data[5] * rhs,
-            self.data[8] * rhs,
+            f32::trunc((self.data[0] * rhs) * 100.) / 100.,
+            f32::trunc((self.data[3] * rhs) * 100.) / 100.,
+            f32::trunc((self.data[6] * rhs) * 100.) / 100.,
+            f32::trunc((self.data[1] * rhs) * 100.) / 100.,
+            f32::trunc((self.data[4] * rhs) * 100.) / 100.,
+            f32::trunc((self.data[7] * rhs) * 100.) / 100.,
+            f32::trunc((self.data[2] * rhs) * 100.) / 100.,
+            f32::trunc((self.data[5] * rhs) * 100.) / 100.,
+            f32::trunc((self.data[8] * rhs) * 100.) / 100.,
         )
     }
 }
