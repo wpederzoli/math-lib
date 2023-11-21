@@ -107,3 +107,11 @@ fn inverse() {
 
     assert_eq!(expected, mat.inverse());
 }
+
+#[test]
+fn transpose() {
+    let mat = Matrix3x3::new(1., 2., 3., 4., 5., 6., 7., 8., 9.);
+    let expected = Matrix3x3::new(1., 4., 7., 2., 5., 8., 3., 6., 9.);
+
+    assert_eq!(mat.transpose(), expected);
+}

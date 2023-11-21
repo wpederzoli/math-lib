@@ -40,6 +40,20 @@ impl Matrix3x3 {
         cof * (1. / d)
     }
 
+    pub fn transpose(self) -> Matrix3x3 {
+        let m0 = self.data[0];
+        let m1 = self.data[1];
+        let m2 = self.data[2];
+        let m3 = self.data[3];
+        let m4 = self.data[4];
+        let m5 = self.data[5];
+        let m6 = self.data[6];
+        let m7 = self.data[7];
+        let m8 = self.data[8];
+
+        Matrix3x3::new(m0, m1, m2, m3, m4, m5, m6, m7, m8)
+    }
+
     fn determinant(self) -> f32 {
         self.data[0] * self.data[4] * self.data[8]
             + (self.data[3] * self.data[7] * self.data[2])
