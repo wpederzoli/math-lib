@@ -82,3 +82,36 @@ fn identity_matrix() {
     assert_eq!(Matrix3x3::identity(), expected);
     assert_eq!(mat3 * Matrix3x3::identity(), mat3);
 }
+
+#[test]
+fn inverse_not_exist() {
+    let mat = Matrix3x3::new(1., 2., 3., 4., 5., 6., 7., 8., 9.);
+
+    assert_eq!(mat.inverse(), mat);
+}
+
+#[test]
+fn inverse() {
+    let mat = Matrix3x3::new(3., 2., 5., 2., -1., 4., -1., 2., 1.);
+    let expected = Matrix3x3::new(
+        f32::trunc((3. / 8.) * 100.) / 100.,
+        f32::trunc((-1. / 3.) * 100.) / 100.,
+        f32::trunc((-13. / 24.) * 100.) / 100.,
+        f32::trunc((1. / 4.) * 100.) / 100.,
+        f32::trunc((-1. / 3.) * 100.) / 100.,
+        f32::trunc((1. / 12.) * 100.) / 100.,
+        f32::trunc((-1. / 8.) * 100.) / 100.,
+        f32::trunc((1. / 3.) * 100.) / 100.,
+        f32::trunc((7. / 24.) * 100.) / 100.,
+    );
+
+    assert_eq!(expected, mat.inverse());
+}
+
+#[test]
+fn transpose() {
+    let mat = Matrix3x3::new(1., 2., 3., 4., 5., 6., 7., 8., 9.);
+    let expected = Matrix3x3::new(1., 4., 7., 2., 5., 8., 3., 6., 9.);
+
+    assert_eq!(mat.transpose(), expected);
+}
