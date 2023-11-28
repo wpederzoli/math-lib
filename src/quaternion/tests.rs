@@ -29,3 +29,45 @@ fn assign_quaternion() {
 
     assert_eq!(quat, expected);
 }
+
+#[test]
+fn sum_quaternions() {
+    let expected = Quaternion::new(2., Vector3::new(4., 5., 6.));
+
+    let quat_a = Quaternion::new(1., Vector3::new(2., 3., 4.));
+    let quat_b = Quaternion::new(1., Vector3::new(2., 2., 2.));
+
+    assert_eq!(quat_a + quat_b, expected);
+}
+
+#[test]
+fn sum_assign_quaternion() {
+    let expected = Quaternion::new(2., Vector3::new(4., 5., 6.));
+    let mut quat = Quaternion::new(1., Vector3::new(2., 3., 4.));
+    let quat_b = Quaternion::new(1., Vector3::new(2., 2., 2.));
+
+    quat += quat_b;
+
+    assert_eq!(quat, expected);
+}
+
+#[test]
+fn substract_quaternions() {
+    let expected = Quaternion::new(2., Vector3::new(4., 5., 6.));
+
+    let quat_a = Quaternion::new(3., Vector3::new(6., 7., 8.));
+    let quat_b = Quaternion::new(1., Vector3::new(2., 2., 2.));
+
+    assert_eq!(quat_a - quat_b, expected);
+}
+
+#[test]
+fn substract_assign_quaternion() {
+    let expected = Quaternion::new(1., Vector3::new(4., 5., 6.));
+    let mut quat = Quaternion::new(2., Vector3::new(6., 7., 8.));
+    let quat_b = Quaternion::new(1., Vector3::new(2., 2., 2.));
+
+    quat -= quat_b;
+
+    assert_eq!(quat, expected);
+}
