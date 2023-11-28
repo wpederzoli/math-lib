@@ -3,6 +3,8 @@ use std::{
     ops::{Add, AddAssign, Mul, MulAssign},
 };
 
+use crate::prelude::Vector3;
+
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub struct Matrix3x3 {
     pub data: [f32; 9],
@@ -208,6 +210,17 @@ impl MulAssign<Matrix3x3> for Matrix3x3 {
         self.data[2] = m6;
         self.data[5] = m7;
         self.data[8] = m8;
+    }
+}
+
+impl Mul<Vector3> for Matrix3x3 {
+    type Output = Vector3;
+    fn mul(self, rhs: Vector3) -> Self::Output {
+        let x = self.data[0] * rhs.x + self.data[3] * rhs.y + self.data[6] * rhs.z;
+        let y = self.data[1] * rhs.x + self.data[4] * rhs.y + self.data[7] * rhs.z;
+        let z = self.data[2] * rhs.x + self.data[5] * rhs.y + self.data[8] * rhs.z;
+
+        Vector3::new(x, y, z)
     }
 }
 

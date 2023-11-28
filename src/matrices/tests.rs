@@ -1,3 +1,5 @@
+use crate::prelude::Vector3;
+
 use super::*;
 
 #[test]
@@ -114,4 +116,12 @@ fn transpose() {
     let expected = Matrix3x3::new(1., 4., 7., 2., 5., 8., 3., 6., 9.);
 
     assert_eq!(mat.transpose(), expected);
+}
+
+#[test]
+fn transform() {
+    let mat = Matrix3x3::new(0., 0., 0., 0., 0., -1., 0., 1., 0.);
+    let vec = Vector3::new(0., 1., 0.);
+
+    assert_eq!(mat * vec, Vector3::new(0., 0., 1.));
 }
