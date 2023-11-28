@@ -1,2 +1,2 @@
 # math-lib
-A simple math library for matrix operations
+A libary intended to make working with Vector, Matrix and Quaternion operations easier.
