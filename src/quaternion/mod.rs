@@ -80,5 +80,22 @@ impl MulAssign for Quaternion {
     }
 }
 
+impl Mul<f32> for Quaternion {
+    type Output = Quaternion;
+    fn mul(self, rhs: f32) -> Self::Output {
+        Quaternion {
+            scalar: self.scalar * rhs,
+            vector: self.vector * rhs,
+        }
+    }
+}
+
+impl MulAssign<f32> for Quaternion {
+    fn mul_assign(&mut self, rhs: f32) {
+        self.scalar *= rhs;
+        self.vector *= rhs;
+    }
+}
+
 #[cfg(test)]
 mod tests;

@@ -91,3 +91,21 @@ fn mult_assign_quaternion() {
 
     assert_eq!(a, expected);
 }
+
+#[test]
+fn multiply_scalar_quaternion() {
+    let expected = Quaternion::new(2., Vector3::new(2., 4., 6.));
+    let quat = Quaternion::new(1., Vector3::new(1., 2., 3.));
+
+    assert_eq!(quat * 2., expected);
+}
+
+#[test]
+fn multiply_scalar_assign_quat() {
+    let expected = Quaternion::new(2., Vector3::new(2., 4., 6.));
+    let mut quat = Quaternion::new(1., Vector3::new(1., 2., 3.));
+
+    quat *= 2.;
+
+    assert_eq!(quat, expected);
+}
