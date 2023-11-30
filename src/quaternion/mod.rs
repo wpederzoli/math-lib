@@ -1,4 +1,4 @@
-use std::ops::{Add, AddAssign, Sub, SubAssign};
+use std::ops::{Add, AddAssign, Mul, MulAssign, Sub, SubAssign};
 
 use crate::prelude::Vector3;
 
@@ -56,6 +56,27 @@ impl SubAssign for Quaternion {
     fn sub_assign(&mut self, rhs: Self) {
         self.vector -= rhs.vector;
         self.scalar -= rhs.scalar;
+    }
+}
+
+impl Mul for Quaternion {
+    type Output = Quaternion;
+    fn mul(self, rhs: Self) -> Self::Output {
+        Quaternion {
+            scalar: self.scalar * rhs.scalar - self.vector.dot(rhs.vector),
+            vector: rhs.vector * self.scalar
+                + self.vector * rhs.scalar
+                + self.vector.cross(rhs.vector),
+        }
+    }
+}
+
+impl MulAssign for Quaternion {
+    fn mul_assign(&mut self, rhs: Self) {
+        let q = *self * rhs;
+
+        self.scalar = q.scalar;
+        self.vector = q.vector;
     }
 }
 

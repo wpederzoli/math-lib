@@ -71,3 +71,23 @@ fn substract_assign_quaternion() {
 
     assert_eq!(quat, expected);
 }
+
+#[test]
+fn multiply_quaternion() {
+    let expected = Quaternion::new(-8., Vector3::new(1., 14., 3.));
+    let a = Quaternion::new(1., Vector3::new(1., 2., 3.));
+    let b = Quaternion::new(2., Vector3::new(3., 2., 1.));
+
+    assert_eq!(a * b, expected);
+}
+
+#[test]
+fn mult_assign_quaternion() {
+    let expected = Quaternion::new(-8., Vector3::new(1., 14., 3.));
+    let mut a = Quaternion::new(1., Vector3::new(1., 2., 3.));
+    let b = Quaternion::new(2., Vector3::new(3., 2., 1.));
+
+    a *= b;
+
+    assert_eq!(a, expected);
+}
