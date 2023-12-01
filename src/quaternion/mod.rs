@@ -29,6 +29,14 @@ impl Quaternion {
             + (self.vector.z * self.vector.z);
         f32::trunc(n.sqrt() * 100.) / 100.
     }
+
+    pub fn normalize(&mut self) {
+        let n = self.norm();
+        if n != 0. {
+            self.scalar *= ((1. / n) * 100.).round() / 100.;
+            self.vector *= ((1. / n) * 100.).round() / 100.;
+        }
+    }
 }
 
 impl Add for Quaternion {

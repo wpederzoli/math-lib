@@ -120,3 +120,12 @@ fn norm_quaternion() {
 
     assert_eq!(q.norm(), f32::trunc(expected.sqrt() * 100.) / 100.);
 }
+
+#[test]
+fn unit_normalize_quat() {
+    let expected = Quaternion::new(0.26, Vector3::new(0.26, 0.52, 0.78));
+    let mut q = Quaternion::new(1., Vector3::new(1., 2., 3.));
+    q.normalize();
+
+    assert_eq!(q, expected);
+}
