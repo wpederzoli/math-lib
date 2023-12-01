@@ -21,6 +21,14 @@ impl Quaternion {
     pub fn new(scalar: f32, vector: Vector3) -> Self {
         Quaternion { scalar, vector }
     }
+
+    pub fn norm(self) -> f32 {
+        let n = (self.scalar * self.scalar)
+            + (self.vector.x * self.vector.x)
+            + (self.vector.y * self.vector.y)
+            + (self.vector.z * self.vector.z);
+        f32::trunc(n.sqrt() * 100.) / 100.
+    }
 }
 
 impl Add for Quaternion {

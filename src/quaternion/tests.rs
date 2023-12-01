@@ -109,3 +109,14 @@ fn multiply_scalar_assign_quat() {
 
     assert_eq!(quat, expected);
 }
+
+#[test]
+fn norm_quaternion() {
+    let q = Quaternion::new(1., Vector3::new(1., 2., 3.));
+    let expected = (q.scalar * q.scalar)
+        + (q.vector.x * q.vector.x)
+        + (q.vector.y * q.vector.y)
+        + (q.vector.z * q.vector.z);
+
+    assert_eq!(q.norm(), f32::trunc(expected.sqrt() * 100.) / 100.);
+}
