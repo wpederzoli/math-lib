@@ -129,3 +129,11 @@ fn unit_normalize_quat() {
 
     assert_eq!(q, expected);
 }
+
+#[test]
+fn cojugate_quaternion() {
+    let expected = Quaternion::new(1., Vector3::new(-1., -2., -3.));
+    let q = Quaternion::new(1., Vector3::new(1., 2., 3.));
+
+    assert_eq!(q.conjugate(), expected);
+}

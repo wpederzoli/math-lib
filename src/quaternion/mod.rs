@@ -37,6 +37,13 @@ impl Quaternion {
             self.vector *= ((1. / n) * 100.).round() / 100.;
         }
     }
+
+    pub fn conjugate(self) -> Quaternion {
+        Quaternion {
+            scalar: self.scalar,
+            vector: self.vector * -1.,
+        }
+    }
 }
 
 impl Add for Quaternion {
