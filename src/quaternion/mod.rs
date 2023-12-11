@@ -44,6 +44,19 @@ impl Quaternion {
             vector: self.vector * -1.,
         }
     }
+
+    pub fn inverse(self) -> Quaternion {
+        let mut absolute_val = self.norm();
+        absolute_val *= absolute_val;
+        absolute_val = 1. / absolute_val;
+
+        let conjugate = self.conjugate();
+
+        Quaternion {
+            scalar: conjugate.scalar * absolute_val,
+            vector: conjugate.vector * absolute_val,
+        }
+    }
 }
 
 impl Add for Quaternion {

@@ -137,3 +137,11 @@ fn cojugate_quaternion() {
 
     assert_eq!(q.conjugate(), expected);
 }
+
+#[test]
+fn inverse_quat() {
+    let expected = Quaternion::new(0.16, Vector3::new(-0.08, -0.16, -0.32));
+    let q = Quaternion::new(1., Vector3::new(0.5, 1., 2.));
+
+    assert_eq!(q.inverse(), expected);
+}
