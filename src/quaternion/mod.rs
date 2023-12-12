@@ -57,6 +57,19 @@ impl Quaternion {
             vector: conjugate.vector * absolute_val,
         }
     }
+
+    pub fn rotate_angle(self, u_angle: f32, u_axis: &Vector3) -> Vector3 {
+        let p_quat = Quaternion::new(0., self.vector);
+        u_axis.normalize();
+
+        let mut r_quat = Quaternion::new(u_angle, *u_axis);
+        r_quat.normalize();
+        let inverse = r_quat.inverse();
+
+        let rotated = p_quat * r_quat * inverse;
+
+        rotated.vector
+    }
 }
 
 impl Add for Quaternion {
